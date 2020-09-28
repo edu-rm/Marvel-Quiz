@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Link } from "react-router-dom";
+
 import { Container } from "./styles";
 import wallpaper from "../../assets/wallpaperpng.png";
 
@@ -13,7 +15,7 @@ const Home: React.FC = () => {
             <span>FIND YOUR</span>
             HERO!
           </h1>
-          <button>START</button>
+          <Link to="/quiz">START</Link>
         </div>
       </div>
     </Container>

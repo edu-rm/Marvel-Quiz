@@ -1,18 +1,21 @@
 import React from "react";
 
-import Home from "./pages/Home";
+import GlobalProvider from "./hooks/GlobalProvider";
+
+import Routes from "./routes";
+
 import GlobalStyles from "./styles/global";
 import PageLayout from "./Layout/PageLayout";
 
 function App() {
   return (
-    <>
+    <GlobalProvider>
       <PageLayout>
-        <Home />
+        <Routes />
       </PageLayout>
 
       <GlobalStyles />
-    </>
+    </GlobalProvider>
   );
 }
 

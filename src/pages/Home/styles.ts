@@ -8,11 +8,25 @@ const animationUp = keyframes`
   to {
     opacity: 1;
     transform: translateY(0);
+    transform: rotate(-5deg);
+  }
+`;
+
+const animationImage = keyframes`
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+
+  }
+  100% {
+    transform: scale(1);
   }
 `;
 
 export const Container = styled.div`
-  height: 100%;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,12 +37,12 @@ export const Container = styled.div`
     position: relative;
     justify-content: center;
     align-items: center;
-    animation: ${animationUp} 1s;
   }
 
   img {
     width: 50%;
     width: 600px;
+    animation: ${animationImage} 5s infinite;
   }
 
   .card {
@@ -44,6 +58,7 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
     margin-top: -100px;
+    animation: ${animationUp} 3s;
     /* position: relative; */
 
     h1 {
@@ -61,7 +76,8 @@ export const Container = styled.div`
       }
     }
 
-    button {
+    a {
+      text-decoration: none;
       padding: 9px 50px;
       font-size: 36px;
       color: #fff;
