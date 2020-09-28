@@ -6,6 +6,14 @@ export const Container = styled.div`
   align-items: center;
   width: 100%;
   font-size: 26px;
+  position: relative;
+
+  span {
+    position: absolute;
+    font-size: 14px;
+    color: #ec1d25;
+    top: 100%;
+  }
 
   p {
     text-align: left;

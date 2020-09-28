@@ -10,8 +10,8 @@ interface IQuizContext {
   favorite: string | undefined;
   name: string | undefined;
   birth: string | undefined;
-  setRequested: React.Dispatch<React.SetStateAction<boolean | undefined>>;
-  requested: boolean | undefined;
+  setRequested: React.Dispatch<React.SetStateAction<boolean>>;
+  requested: boolean;
   setData({ name, favorite, birth }: ISetDataFunction): void;
 }
 
@@ -21,7 +21,7 @@ const QuizProvider: React.FC = ({ children }) => {
   const [name, setName] = useState<string | undefined>();
   const [favorite, setFavorite] = useState<string | undefined>();
   const [birth, setBirth] = useState<string | undefined>();
-  const [requested, setRequested] = useState<boolean>();
+  const [requested, setRequested] = useState<boolean>(false);
 
   const setData = useCallback(({ name, favorite, birth }: ISetDataFunction) => {
     setName(name);

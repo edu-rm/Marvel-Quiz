@@ -1,6 +1,8 @@
 import React, { useRef, useCallback } from "react";
-
+import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import { AiOutlineArrowLeft } from "react-icons/ai";
+import * as Yup from "yup";
 
 import { Container } from "./styles";
 import { Form as FormUnform } from "@unform/web";
@@ -16,6 +18,10 @@ interface IDataTreated {
   birth: string;
 }
 
+interface IErrorObject {
+  [key: string]: string;
+}
+
 const Form: React.FC = () => {
   const { push } = useHistory();
   const { setData, setRequested } = useQuiz();
@@ -23,30 +29,60 @@ const Form: React.FC = () => {
   const comicsRef = useRef<HTMLInputElement>(null);
   const seriesRef = useRef<HTMLInputElement>(null);
 
-  const handleSubmit = useCallback((data) => {
-    setRequested(false);
-    let dataTreated: IDataTreated = {} as IDataTreated;
+  const handleSubmit = useCallback(
+    async (data) => {
+      setRequested(false);
+      let dataTreated: IDataTreated = {} as IDataTreated;
 
-    if (comicsRef.current?.checked) {
-      dataTreated = {
-        ...data,
-        favorite: "comics",
-      };
-    } else {
-      dataTreated = {
-        ...data,
-        favorite: "series",
-      };
-    }
+      if (comicsRef.current?.checked) {
+        dataTreated = {
+          ...data,
+          favorite: "comics",
+        };
+      } else {
+        dataTreated = {
+          ...data,
+          favorite: "series",
+        };
+      }
 
-    setData(dataTreated);
-    setRequested(true);
-    push("/matches");
-  }, []);
+      try {
+        const schema = Yup.object().shape({
+          name: Yup.string().required("The name is required"),
+          birth: Yup.string().required("The birth is required"),
+        });
+
+        await schema.validate(dataTreated, {
+          abortEarly: false,
+        });
+
+        formRef.current?.setErrors({});
+      } catch (err) {
+        if (err instanceof Yup.ValidationError) {
+          console.log(err);
+          const errorMessages = {} as IErrorObject;
+
+          err.inner.forEach((error) => {
+            errorMessages[error.path] = error.message;
+          });
+          formRef.current?.setErrors(errorMessages);
+        }
+        return;
+      }
+
+      setData(dataTreated);
+      setRequested(true);
+      push("/matches");
+    },
+    [push, setData, setRequested]
+  );
 
   return (
     <Container>
       <div className="form-wrapper">
+        <Link to="/">
+          <AiOutlineArrowLeft size={28} />
+        </Link>
         <h1>Fill out the form below</h1>
 
         <FormUnform onSubmit={(data) => handleSubmit(data)} ref={formRef}>

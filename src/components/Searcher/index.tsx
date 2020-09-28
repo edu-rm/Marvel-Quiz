@@ -16,7 +16,9 @@ const Searcher: React.FC<IProps> = ({ filtered, setFiltered, characters }) => {
   function handleChange(search: string) {
     setInputValue(search);
     if (search === "") {
-      setInclude(new Array(...characters));
+      setInclude(new Array());
+      setFiltered(new Array(...characters));
+
       return;
     }
     // setFiltered(new Array(...characters));

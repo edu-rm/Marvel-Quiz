@@ -16,11 +16,18 @@ const Route: React.FC<IRouterProps> = ({
 }) => {
   const { requested } = useQuiz();
 
-  if (results && !requested) {
-    return <Redirect to="/quiz" />;
-  }
-
-  return <ReactRoute {...rest} render={() => <Component />} />;
+  return (
+    <ReactRoute
+      {...rest}
+      render={() =>
+        results && !requested ? (
+          <Redirect to={{ pathname: "/quiz" }} />
+        ) : (
+          <Component />
+        )
+      }
+    />
+  );
 };
 
 export default Route;

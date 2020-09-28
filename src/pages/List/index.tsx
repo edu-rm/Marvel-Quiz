@@ -21,7 +21,8 @@ export interface ICharacters {
 }
 
 export const List: React.FC = () => {
-  const { name, favorite, birth, setRequested } = useQuiz();
+  const [loading, setLoading] = useState<boolean>(true);
+  const { name, favorite, birth } = useQuiz();
 
   const [characters, setCharacters] = useState<ICharacters[]>(
     [] as Array<ICharacters>
@@ -78,6 +79,7 @@ export const List: React.FC = () => {
     }
 
     requestData();
+    setLoading(false);
   }, []);
 
   const handleFilter = useCallback(
@@ -91,7 +93,7 @@ export const List: React.FC = () => {
     <Container>
       <div className="wrapper">
         <Link to="/quiz">
-          <AiOutlineArrowLeft size={20} />
+          <AiOutlineArrowLeft size={28} />
         </Link>
         <div className="header">
           <h1>Matches</h1>
@@ -138,6 +140,11 @@ export const List: React.FC = () => {
             ))}
         </Cards>
       </div>
+      {loading && (
+        <div id="loading">
+          <h1>Carregando...</h1>
+        </div>
+      )}
     </Container>
   );
 };

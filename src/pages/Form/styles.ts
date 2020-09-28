@@ -20,13 +20,21 @@ export const Container = styled.div`
   text-transform: uppercase;
 
   .form-wrapper {
-    box-shadow: -10px 10px 0px 1px #ec1d25;
+    position: relative;
+
+    > a {
+      position: absolute;
+      left: 8px;
+      top: 8px;
+    }
+
+    box-shadow: -10px 10px 0px 1px rgba(236, 29, 37, 1);
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     background: #fff;
-    width: 800px;
+    width: 1000px;
     animation: ${animationUp} 1s;
 
     h1 {

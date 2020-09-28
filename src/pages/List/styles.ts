@@ -1,5 +1,15 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
+const animationUp = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
 export const Container = styled.div`
   display: flex;
   align-items: center;
@@ -8,6 +18,7 @@ export const Container = styled.div`
 
   .wrapper {
     position: relative;
+    animation: ${animationUp} 2s;
 
     > a {
       position: absolute;
@@ -70,6 +81,24 @@ export const Container = styled.div`
     background: white;
     font-size: 60px;
     padding: 20px;
+  }
+
+  #loading {
+    background: rgba(0, 0, 0, 0.2);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 5;
+
+    h1 {
+      font-size: 102px;
+      color: #fff;
+    }
   }
 `;
 

@@ -15,6 +15,7 @@ const Routes: React.FC = () => {
         <Route path="/" exact component={Home} />
         <Route path="/quiz" component={Form} />
         <Route path="/matches" component={List} results />
+        <Route component={() => <h1 id="not-found">404</h1>} />
       </Switch>
     </BrowserRouter>
   );
